@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BottomScanScreen</class>
+ <widget class="QWidget" name="BottomScanScreen">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>804</width>
+    <height>470</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Bottom Part Scanning</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+#BottomScanScreen {
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+#headerFrame {
+    background-color: #1976d2;
+}
+#headerLabel {
+    color: white;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+/* Tip Box Styles */
+QFrame.TipBox { /* Using a class-like selector for the common style */
+    min-width: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    border: 2px solid #1976d2; /* Blue Border */
+    background-color: #e3f2fd; /* Light Blue Fill (Active Indicator) */
+    border-radius: 4px;
+}
+QFrame#selectedTipBox {
+    background-color: white; /* Make the 'Selected Part' box less prominent/active */
+    border-color: #e0e0e0;
+}
+
+
+/* Scanning Labels */
+#scanLabel {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #333;
+    /* Removed redundant qproperty-alignment as it's set by layout */
+}
+#selectedPartLabel {
+    font-size: 16pt;
+    color: #555;
+    /* Removed redundant qproperty-alignment as it's set by layout */
+}
+
+/* Progress Bar */
+QProgressBar {
+    border: 2px solid #1976d2;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16pt;
+}
+QProgressBar::chunk {
+    background-color: #4CAF50; /* Changed to green for process progress */
+}
+
+/* Footer (Progress Bar is now here) */
+#footerFrame {
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+}
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayoutMain">
+   <item>
+    <widget class="QFrame" name="headerFrame">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <item>
+       <widget class="QLabel" name="headerLabel">
+        <property name="text">
+         <string>Bottom Part Scanning</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="scanProgressLayout">
+     <property name="spacing">
+      <number>15</number>
+     </property>
+     <property name="leftMargin">
+      <number>20</number>
+     </property>
+     <property name="rightMargin">
+      <number>20</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="scanLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string>Processing in progress... Scanning Bottom Part</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QFrame" name="footerFrame">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="footerLayout">
+      <item>
+       <widget class="QProgressBar" name="scanProgressBar">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
