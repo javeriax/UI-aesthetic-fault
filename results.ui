@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ResultsScreen</class>
+ <widget class="QWidget" name="ResultsScreen">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Scan Results</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+#ResultsScreen {
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+#headerFrame {
+    background-color: #1976d2;
+}
+#headerLabel {
+    color: white;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+/* Status Label */
+#statusLabel {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #2e7d32; /* Default GOOD green */
+    margin: 10px;
+}
+
+/* Grid images */
+#gridFrame QLabel {
+    border: 2px dashed #bbb;
+    border-radius: 8px;
+    min-width: 100px;
+    min-height: 80px;
+    background-color: #ffffff;
+}
+
+/* Button */
+#backButton {
+    background-color: #1976d2;
+    color: white;
+    font-size: 14pt;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 25px;
+}
+#backButton:hover {
+    background-color: #1565c0;
+}
+   </string>
+  </property>
+
+  <layout class="QVBoxLayout" name="mainLayout">
+
+   <!-- HEADER -->
+   <item>
+    <widget class="QFrame" name="headerFrame">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <item>
+       <widget class="QLabel" name="headerLabel">
+        <property name="text">
+         <string>Results Overview</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- STATUS -->
+   <item>
+    <widget class="QLabel" name="statusLabel">
+     <property name="text">
+      <string>🟢 Status: GOOD</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+
+   <!-- GRID -->
+   <item>
+    <widget class="QFrame" name="gridFrame">
+     <layout class="QGridLayout" name="gridLayout">
+      <!-- 3x4 grid placeholders -->
+      <item row="0" column="0">
+       <widget class="QLabel" name="image_0_0">
+        <property name="text">
+         <string>Image 1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="image_0_1">
+        <property name="text">
+         <string>Image 2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="image_0_2">
+        <property name="text">
+         <string>Image 3</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="image_0_3">
+        <property name="text">
+         <string>Image 4</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+
+      <item row="1" column="0">
+       <widget class="QLabel" name="image_1_0">
+        <property name="text">
+         <string>Image 5</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="image_1_1">
+        <property name="text">
+         <string>Image 6</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="image_1_2">
+        <property name="text">
+         <string>Image 7</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="image_1_3">
+        <property name="text">
+         <string>Image 8</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+
+      <item row="2" column="0">
+       <widget class="QLabel" name="image_2_0">
+        <property name="text">
+         <string>Image 9</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="image_2_1">
+        <property name="text">
+         <string>Image 10</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="image_2_2">
+        <property name="text">
+         <string>Image 11</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLabel" name="image_2_3">
+        <property name="text">
+         <string>Image 12</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- BUTTON -->
+   <item>
+    <widget class="QPushButton" name="backButton">
+     <property name="minimumSize">
+      <size>
+       <width>220</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>⬅ Back to Part Selection</string>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

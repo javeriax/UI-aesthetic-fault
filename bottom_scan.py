@@ -1,34 +1,41 @@
 from PyQt6.QtWidgets import QWidget
 from PyQt6 import uic
-from PyQt6.QtCore import QTimer, pyqtSignal
+from PyQt6.QtCore import pyqtSignal, Qt
 
 class BottomScanWindow(QWidget):
     scan_complete = pyqtSignal(str)
+
     def __init__(self, part_name, parent=None):
         super().__init__(parent)
         uic.loadUi("bottom_scan.ui", self)
+
         self.part_name = part_name
-        self.setWindowTitle(f"Bottom Scan - {part_name}")
+        self.setWindowTitle(f"Bottom Scan: {part_name}")
 
         if hasattr(self, "scanLabel"):
-            self.scanLabel.setText(f"Scanning bottom of {part_name}...")
+            self.scanLabel.setText(f"Scanning Bottom of {part_name}...")
 
-        if hasattr(self, "scanProgressBar"):
-            self.scanProgressBar.setValue(0)
-            self.progress_value = 0
-            self.timer = QTimer(self)
-            self.timer.timeout.connect(self.update_progress)
-            self.timer.start(50)
+        self.progress_value = 0
+        self.segment_count = 4
+        self.increment = 100 // self.segment_count
 
-    def update_progress(self):
+        self.scanProgressBar.setValue(self.progress_value)
+
+    def keyPressEvent(self, event):
+        """Handle key press to advance progress."""
+        if event.key() == Qt.Key.Key_Right:  # ▶️ Forward arrow key (PyQt6 syntax)
+            self.advance_progress()
+
+    def advance_progress(self):
+        """Advance progress bar in 4 segments."""
         if self.progress_value < 100:
-            self.progress_value += 1
+            self.progress_value += self.increment
             self.scanProgressBar.setValue(self.progress_value)
-        else:
-            self.timer.stop()
-            self.finish_scan()
-            print(f"✅ Bottom scan for {self.part_name} completed.")
+
+            if self.progress_value >= 100:
+                self.finish_scan()
+
     def finish_scan(self):
         print(f"✅ Bottom scan for {self.part_name} completed.")
-        self.scan_complete.emit(self.part_name)  # ✅ Emit signal when finished
+        self.scan_complete.emit(self.part_name)
         self.close()
