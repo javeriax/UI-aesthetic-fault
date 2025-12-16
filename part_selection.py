@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QApplication
 from PyQt6 import uic
 from PyQt6.QtCore import Qt
 from imageloader import load_images_for_buttons
@@ -77,7 +77,7 @@ class PartSelectorApp(QWidget):
             self.selected_part = selected_button.text()
             self.selected_image = self.button_to_image.get(selected_button, None)
             if self.flow_manager:
-                self.hide()
+                # DON'T hide here - let flow_manager handle it after new window is shown
                 self.flow_manager.start_flow(self.selected_part, self.selected_image)
         else:
             print("No part selected.")
