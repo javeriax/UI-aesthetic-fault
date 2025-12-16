@@ -12,7 +12,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Team Login</string>
+   <string>Team Login / ٹیم لاگ ان</string>
   </property>
   <property name="styleSheet">
    <string notr="true">
@@ -68,7 +68,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Supervisor / Quality Team Login</string>
+    <string>Login / لاگ ان</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -79,7 +79,7 @@
    <item>
     <widget class="QLineEdit" name="usernameEdit">
      <property name="placeholderText">
-      <string>Username</string>
+      <string>Username / صارف کا نام</string>
      </property>
     </widget>
    </item>
@@ -90,7 +90,7 @@
       <enum>QLineEdit::Password</enum>
      </property>
      <property name="placeholderText">
-      <string>Password</string>
+      <string>Password / پاس ورڈ</string>
      </property>
     </widget>
    </item>
@@ -98,7 +98,7 @@
    <item>
     <widget class="QPushButton" name="loginButton">
      <property name="text">
-      <string>Login</string>
+      <string>Login / لاگ ان</string>
      </property>
     </widget>
    </item>

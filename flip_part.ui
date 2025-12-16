@@ -7,70 +7,181 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>300</height>
+    <width>1024</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Flip Part Instruction</string>
+   <string>Flip Part Instruction / حصہ پلٹنے کی ہدایت</string>
   </property>
   <property name="styleSheet">
    <string notr="true">
-    QWidget {
-        background-color: #f5f7fa;
-        font-family: 'Segoe UI', sans-serif;
+    /* --- Overall Background --- */
+    #FlipInstructionScreen {
+        background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                    stop:0 #e8eaf6, stop:1 #f5f5f5);
+        font-family: 'Segoe UI', Arial, sans-serif;
     }
-
-    QLabel {
-        font-size: 14pt;
-        font-weight: 500;
-        color: #333333;
+    
+    /* --- Main Container --- */
+    #mainFrame {
+        background-color: white;
+        border: 3px solid #1976d2;
+        border-radius: 24px;
     }
-
-    QPushButton {
+    
+    /* --- Title Label --- */
+    #titleLabel {
+        color: #1565c0;
+        font-size: 42pt;
+        font-weight: 600;
+        background: transparent;
+    }
+    
+    /* --- Message Label --- */
+    #messageLabel {
+        font-size: 24pt;
+        font-weight: 400;
+        color: #424242;
+        background: transparent;
+    }
+    
+    /* --- Next Button --- */
+    #nextButton {
         background-color: #1976d2;
         color: white;
-        font-weight: bold;
-        border-radius: 8px;
-        padding: 10px 20px;
-        font-size: 12pt;
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 18px 40px;
+        font-size: 18pt;
         border: none;
+        min-width: 280px;
+        min-height: 70px;
     }
-
-    QPushButton:hover {
+    
+    #nextButton:hover {
+        background-color: #1565c0;
+        border: 2px solid #0d47a1;
+    }
+    
+    #nextButton:pressed {
         background-color: #0d47a1;
     }
    </string>
   </property>
-
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1">
+  
+  <layout class="QVBoxLayout" name="mainLayout" stretch="2,6,2">
+   <property name="spacing">
+    <number>40</number>
+   </property>
+   <property name="leftMargin">
+    <number>80</number>
+   </property>
+   <property name="topMargin">
+    <number>60</number>
+   </property>
+   <property name="rightMargin">
+    <number>80</number>
+   </property>
+   <property name="bottomMargin">
+    <number>60</number>
+   </property>
+   
+   <!-- Top Spacer -->
    <item>
-    <widget class="QLabel" name="instructionLabel">
-     <property name="text">
-      <string>
-       The top part has finished processing.&lt;br&gt;
-       Flip the part to start processing the bottom.&lt;br&gt;&lt;br&gt;
-       Click &lt;b&gt;Next&lt;/b&gt; after flipping the part.
-      </string>
+    <spacer name="topSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+    </spacer>
+   </item>
+   
+   <!-- Main Container -->
+   <item>
+    <widget class="QFrame" name="mainFrame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
+     <layout class="QVBoxLayout" name="frameLayout">
+      <property name="spacing">
+       <number>40</number>
+      </property>
+      <property name="leftMargin">
+       <number>80</number>
+      </property>
+      <property name="topMargin">
+       <number>80</number>
+      </property>
+      <property name="rightMargin">
+       <number>80</number>
+      </property>
+      <property name="bottomMargin">
+       <number>80</number>
+      </property>
+      
+      <!-- Title -->
+      <item>
+       <widget class="QLabel" name="titleLabel">
+        <property name="text">
+         <string>Top Scan Completed / اوپری اسکین مکمل</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      
+      <!-- Message -->
+      <item>
+       <widget class="QLabel" name="messageLabel">
+        <property name="text">
+         <string>Please flip to scan the other side / براہ کرم دوسری طرف اسکین کرنے کے لیے پلٹائیں۔</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-
-   <item alignment="Qt::AlignHCenter">
+   
+   <!-- Button Area -->
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
     <widget class="QPushButton" name="nextButton">
-     <property name="text">
-      <string>Next</string>
-     </property>
-     <property name="minimumWidth">
-      <number>120</number>
-     </property>
-    </widget>
+    <property name="text">
+     <string>Next / اگلا ➜</string>
+    </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

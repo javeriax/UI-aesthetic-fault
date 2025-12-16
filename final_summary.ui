@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FinalSummaryScreen</class>
+ <widget class="QWidget" name="FinalSummaryScreen">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1028</width>
+    <height>639</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Part Summary / حصہ کا خلاصہ</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+#FinalSummaryScreen {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Header */
+#headerFrame {
+    background-color: #1565c0;
+    border-bottom: 2px solid #0d47a1;
+}
+#headerLabel {
+    color: white;
+    font-size: 26pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Main content */
+#contentFrame {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Image box */
+#partImageLabel {
+    border: 3px solid #ddd;
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+/* Labels */
+#partNameLabel, 
+#resultDetailLabel {
+    font-size: 18pt;
+    font-weight: 500;
+    color: #333;
+}
+
+/* GOOD/BAD Status */
+#finalStatusLabel {
+    font-size: 36pt;
+    font-weight: bold;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #ffffff;
+    border: none;
+    color: #333333;
+}
+
+/* Back Button */
+#backButton {
+    background-color: #1976d2;
+    color: white;
+    font-size: 16pt;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 14px 40px;
+}
+#backButton:hover {
+    background-color: #1565c0;
+}
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="headerFrame">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>90</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="headerLabel">
+        <property name="text">
+         <string>Final Results Summary / حتمی نتائج کا خلاصہ</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="contentFrame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QHBoxLayout" name="contentLayout">
+      <property name="spacing">
+       <number>40</number>
+      </property>
+      <property name="leftMargin">
+       <number>20</number>
+      </property>
+      <property name="topMargin">
+       <number>20</number>
+      </property>
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
+      <property name="bottomMargin">
+       <number>20</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="partInfoLayout">
+        <property name="spacing">
+         <number>15</number>
+        </property>
+        <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+         <widget class="QLabel" name="partImageLabel">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>250</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>[Part Image] / [حصہ کی تصویر]</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="partNameLabel">
+          <property name="text">
+                     <string>[N/A]</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="statusLayout">
+        <property name="spacing">
+         <number>15</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="finalStatusLabel">
+          <property name="text">
+           <string>STATUS HERE / یہاں اسٹیٹس</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="resultDetailLabel">
+          <property name="text">
+           <string>Details: 0% error rate / تفصیلات: 0% غلطی کی شرح</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="backButton">
+          <property name="text">
+           <string>Return to Part Selection / حصہ کے انتخاب پر واپس جائیں</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Bottom Part Scanning</string>
+         <string>Bottom Part Scanning / نچلے حصے کی اسکیننگ</string>
   </property>
   <property name="styleSheet">
    <string notr="true">
@@ -96,7 +96,7 @@ QProgressBar::chunk {
       <item>
        <widget class="QLabel" name="headerLabel">
         <property name="text">
-         <string>Bottom Part Scanning</string>
+               <string>Bottom Part Scanning / نچلے حصے کی اسکیننگ</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -129,7 +129,7 @@ QProgressBar::chunk {
         <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>Processing in progress... Scanning Bottom Part</string>
+        <string>Processing in progress... Scanning Bottom Part / پروسیسنگ جاری ہے... نیچے کا حصہ اسکین ہو رہا ہے</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
