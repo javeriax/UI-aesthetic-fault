@@ -33,14 +33,14 @@
     /* --- Title Label --- */
     #titleLabel {
         color: #1565c0;
-        font-size: 42pt;
+        font-size: 24pt;
         font-weight: 600;
         background: transparent;
     }
     
     /* --- Message Label --- */
     #messageLabel {
-        font-size: 24pt;
+        font-size: 16pt;
         font-weight: 400;
         color: #424242;
         background: transparent;
@@ -75,13 +75,13 @@
     <number>40</number>
    </property>
    <property name="leftMargin">
-    <number>80</number>
+    <number>40</number>
    </property>
    <property name="topMargin">
     <number>60</number>
    </property>
    <property name="rightMargin">
-    <number>80</number>
+    <number>40</number>
    </property>
    <property name="bottomMargin">
     <number>60</number>
@@ -113,16 +113,16 @@
        <number>40</number>
       </property>
       <property name="leftMargin">
-       <number>80</number>
+       <number>40</number>
       </property>
       <property name="topMargin">
-       <number>80</number>
+       <number>60</number>
       </property>
       <property name="rightMargin">
-       <number>80</number>
+       <number>40</number>
       </property>
       <property name="bottomMargin">
-       <number>80</number>
+       <number>60</number>
       </property>
       
       <!-- Title -->
@@ -133,6 +133,9 @@
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
