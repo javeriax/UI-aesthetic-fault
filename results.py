@@ -50,46 +50,72 @@ class ResultsScreen(QWidget):
             self.supervisorButton.hide()
         print(f"[ResultsScreen] Supervisor button visible? {self.supervisorButton.isVisible()}")
 
-    def supervisor_override_clicked(self):
+    def supervisor_override_clicked(self, **params):
         print("Supervisor Override clicked for", self.part_name)
         # Add your supervisor functionality here
 
-    def populate_results(self):
-        """Populate images and status. Show supervisor button if bad parts detected."""
+    def populate_results(self, batch="all", **params):
+        """
+        Populate images and status.
+        batch: "top" => first 9 images
+            "bottom" => last 9 images
+            "all" => all images (default)
+        """
         image_labels = [
             getattr(self, f"image_{r}_{c}")
             for r in range(3)
             for c in range(6)
             if hasattr(self, f"image_{r}_{c}")
         ]
-        #show error_images if there is an error and show goodpart if no error:
-        error_images = ["img_error.jpg", "img_err_2.jpg"]
-        good_image = ["45_upright_good_front.jpg", "angle_0_side1_good.jpg","angle_0_good_back.jpg","45_upright_side1_good.jpg","angle_0_good.jpg"]
-        
-        num_labels = len(image_labels)
-        num_bad = random.randint(0, min(4, num_labels))
-        bad_indexes = random.sample(range(num_labels), num_bad)
-        #find erro percentage:
-        self.error_percentage = round((num_bad / num_labels) * 100, 2) if num_labels > 0 else 0
-        print(f"[ResultsScreen] Error Percentage = {self.error_percentage}%")
 
-        for i, label in enumerate(image_labels):
-             # Select the correct image based on GOOD/BAD
-            if i in bad_indexes:
+        error_images = params.get("error_images", ["img_error.jpg", "img_err_2.jpg"])
+        good_image = params.get(
+            "good_image",
+            [
+                "45_upright_good_front.jpg",
+                "angle_0_side1_good.jpg",
+                "angle_0_good_back.jpg",
+                "45_upright_side1_good.jpg",
+                "angle_0_good.jpg"
+            ]
+        )
+        max_bad = params.get("max_bad", 4)
+
+        num_labels = len(image_labels)
+
+        # Determine which indexes to populate
+        if batch == "top":
+            indexes_to_use = list(range(0, 9))
+        elif batch == "bottom":
+            indexes_to_use = list(range(9, 18))
+        else:
+            indexes_to_use = list(range(num_labels))
+
+        num_bad = random.randint(0, min(max_bad, len(indexes_to_use)))
+        bad_indexes = random.sample(indexes_to_use, num_bad)
+
+        # Store total bad indexes across both batches
+        if not hasattr(self, "_all_bad_indexes"):
+            self._all_bad_indexes = set()
+        self._all_bad_indexes.update(bad_indexes)
+
+        # Populate images
+        for i in indexes_to_use:
+            label = image_labels[i]
+            if i in self._all_bad_indexes:
                 img_file = random.choice(error_images)
             else:
                 img_file = random.choice(good_image)
-            # Load original pixmap and scale to the label's actual size so images
-            # appear visually consistent with the part selection screen.
+
             pix = QPixmap(img_file)
             if not pix.isNull():
                 target_size = label.size()
                 if target_size.width() <= 0 or target_size.height() <= 0:
-                      target_size = QSize(300, 240)
+                    target_size = QSize(300, 240)
                 pix = pix.scaled(
-                target_size,
-                Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation,
+                    target_size,
+                    Qt.AspectRatioMode.KeepAspectRatio,
+                    Qt.TransformationMode.SmoothTransformation,
                 )
                 label.setPixmap(pix)
             else:
@@ -97,49 +123,48 @@ class ResultsScreen(QWidget):
 
             label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             label.setStyleSheet(
-                "border: 3px solid #d32f2f; border-radius: 8px;" if i in bad_indexes
+                "border: 3px solid #d32f2f; border-radius: 8px;" if i in self._all_bad_indexes
                 else "border: 3px solid #388e3c; border-radius: 8px;"
             )
 
-        # Update status label
+        # Update error percentage based on all batches so far
+        self.error_percentage = round((len(self._all_bad_indexes) / num_labels) * 100, 2)
+        self.is_part_good = len(self._all_bad_indexes) == 0
+
+        # Update status labels
         show_supervisor = False
-        self.is_part_good = True # Assume good unless bad indexes found
         if hasattr(self, "statusLabel"):
-            if bad_indexes:
-                self.statusLabel.setText(f"🔴 BAD PART! {len(bad_indexes)} alerts detected / 🔴 خراب حصہ! {len(bad_indexes)} الرٹس کا پتہ چلا")
+            if self._all_bad_indexes:
+                self.statusLabel.setText(
+                    f"🔴 BAD PART! {len(self._all_bad_indexes)} alerts detected / 🔴 خراب حصہ! {len(self._all_bad_indexes)} الرٹس کا پتہ چلا"
+                )
                 self.statusLabel.setStyleSheet("color: #c62828; font-size: 18pt; font-weight: bold;")
                 show_supervisor = True
-                self.is_part_good = False
             else:
                 self.statusLabel.setText("🟢 GOOD PART! All regions OK / 🟢 اچھا حصہ! تمام علاقے ٹھیک ہیں")
                 self.statusLabel.setStyleSheet("color: #2e7d32; font-size: 18pt; font-weight: bold;")
-                show_supervisor = False
-                self.is_part_good = True
+
         if hasattr(self, "errorPercentLabel"):
-            # Single bilingual line with one slash and the percentage shown once.
-            # Use Urdu 'غلطی کا فیصد' and force LTR for the numeric value so '%'
-            # remains after the number in RTL layouts.
-            self.errorPercentLabel.setText(
-                f"Error percentage / غلطی کا فیصد: \u200E{self.error_percentage}%"
-            )
+            self.errorPercentLabel.setText(f"Error percentage / غلطی کا فیصد: \u200E{self.error_percentage}%")
             self.errorPercentLabel.setStyleSheet("font-size: 16pt; font-weight: bold; color: #444;")
 
-        # Show supervisor button only if role is supervisor AND bad parts detected
         self.update_supervisor_button_visibility(show_supervisor)
 
-    def go_to_summary(self):
-        """Passes results data to the final summary screen and displays it."""
-        print("➡️ Navigating to Final Summary Screen...")
+
+    def go_to_summary(self, **params):
+        is_good = params.get("is_good", self.is_part_good)
+        error_percentage = params.get("error_percentage", self.error_percentage)
+
         if self.flow_manager:
-            # Create the new summary screen instance
             self.summary_screen = FinalSummaryScreen(
                 part_name=self.part_name,
                 part_image_file=self.part_image,
-                is_good=self.is_part_good,
-                error_percentage=self.error_percentage,
+                is_good=is_good,
+                error_percentage=error_percentage,
                 flow_manager=self.flow_manager
             )
             self.summary_screen.showMaximized()
-            self.hide() # Hide the detailed results screen
+            self.hide()
+
         else:
             print("Flow Manager not available.")
