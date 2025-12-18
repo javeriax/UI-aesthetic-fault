@@ -12,7 +12,7 @@ def main():
 
     # attach flowmanager to selector
     flow_manager = FlowManager(parent_app=selector)
-    selector.flow_manager = flow_manager  #  Give selector access
+    selector.flow_manager = flow_manager  #  Give selector access to flow manager
 
     sys.exit(app.exec())
 
